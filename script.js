@@ -1,19 +1,27 @@
 const CuntryURL ="https://flagsapi.com/Cuntry/style/64.png";
 const ConvertBtn = document.querySelector('.changing');
 const selectDropD = document.querySelectorAll('select');
+
 let fromcountry = document.querySelector('.fromIMG');
 let toCountry = document.querySelector('.toIMG');
 
 //===by default behaviour===
 document.querySelector('.money').value = 100;
 
-
+console.log(selectDropD);
 // creating options for every select element 
 for(let sel of selectDropD){
     for(let curr in currencyToCountry){
         let dropdown = document.createElement('option');
         dropdown.innerHTML = `${curr}`;
         sel.appendChild(dropdown);
+        console.log(sel.name);
+        if(sel.name ==="from"&& curr==="USD"){
+            dropdown.selected = "selected";
+        }
+        if(sel.name ==="TO"&& curr==="INR"){
+            dropdown.selected = "selected";
+        }
     }
     
 }
