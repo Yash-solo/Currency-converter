@@ -1,6 +1,6 @@
 const currencyToCountry = {
+  USD:"US",
   INR: "IN",
-  USD: "US",
   GBP: "GB",
   JPY: "JP",
   CNY: "CN",

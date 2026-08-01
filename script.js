@@ -4,11 +4,19 @@ const selectDropD = document.querySelectorAll('select');
 let fromcountry = document.querySelector('.fromIMG');
 let toCountry = document.querySelector('.toIMG');
 
+//===by default behaviour===
 document.querySelector('.money').value = 100;
 
 
 // creating options for every select element 
-
+for(let sel of selectDropD){
+    for(let curr in currencyToCountry){
+        let dropdown = document.createElement('option');
+        dropdown.innerHTML = `${curr}`;
+        sel.appendChild(dropdown);
+    }
+    
+}
 
 //changing images when edit dropdown
 selectDropD[0].addEventListener('change',(e)=>{
