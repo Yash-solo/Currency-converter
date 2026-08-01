@@ -1,21 +1,19 @@
-const CuntryURL ="https://flagsapi.com/Cuntry/style/64.png";
+const BaseURL = "https://cdn.jsdelivr.net/npm/js-currency-converter@2.0.0/build/js-currency-converter.min.js";
 const ConvertBtn = document.querySelector('.changing');
 const selectDropD = document.querySelectorAll('select');
-
+let massageRslt = document.querySelector('#msg');
 let fromcountry = document.querySelector('.fromIMG');
 let toCountry = document.querySelector('.toIMG');
 
-//===by default behaviour===
 document.querySelector('.money').value = 100;
 
-console.log(selectDropD);
 // creating options for every select element 
 for(let sel of selectDropD){
     for(let curr in currencyToCountry){
         let dropdown = document.createElement('option');
         dropdown.innerHTML = `${curr}`;
         sel.appendChild(dropdown);
-        console.log(sel.name);
+
         if(sel.name ==="from"&& curr==="USD"){
             dropdown.selected = "selected";
         }
@@ -25,13 +23,16 @@ for(let sel of selectDropD){
     }
     
 }
-
+let firstCode = "USD";
+let secondCode = "INR";
 //changing images when edit dropdown
-selectDropD[0].addEventListener('change',(e)=>{
-    fromcountry.src=`https://flagsapi.com/${currencyToCountry[selectDropD[0].value]}/flat/64.png`;
+selectDropD[0].addEventListener('change',(evt)=>{
+    firstCode = evt.target.value;
+    fromcountry.src=`https://flagsapi.com/${currencyToCountry[evt.target.value]}/flat/64.png`;
 })
-selectDropD[1].addEventListener('change',(e)=>{
-    toCountry.src = `https://flagsapi.com/${currencyToCountry[selectDropD[1].value]}/flat/64.png`;
+selectDropD[1].addEventListener('change',(evt)=>{
+    secondCode = evt.target.value;
+    toCountry.src = `https://flagsapi.com/${currencyToCountry[evt.target.value]}/flat/64.png`;
 })
 
 
@@ -43,6 +44,18 @@ ConvertBtn.addEventListener('click',(evt)=>{
     // Taking the amount 
     const amountInput = document.querySelector('.money');     
     const amountVal = Number(amountInput.value);
+
+    //result 
+    async function getRate(){
+        let from = firstCode;
+        let to = secondCode;
+        let response = await fetch(`https://open.er-api.com/v6/latest/${from}`);
+        let data = await response.json();
+        let FinalVal = data.rates[to]*amountVal;
+
+        massageRslt.innerHTML = `${amountVal} ${from} = ${FinalVal} ${to}`;
+    }
+    getRate();
     
 })
 
