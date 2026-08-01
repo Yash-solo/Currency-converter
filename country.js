@@ -1,7 +1,6 @@
 const currencyToCountry = {
   INR: "IN",
   USD: "US",
-  EUR: "EU", // European Union flag
   GBP: "GB",
   JPY: "JP",
   CNY: "CN",

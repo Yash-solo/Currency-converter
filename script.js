@@ -1,17 +1,23 @@
 const CuntryURL ="https://flagsapi.com/Cuntry/style/64.png";
 const ConvertBtn = document.querySelector('.changing');
 const selectDropD = document.querySelectorAll('select');
+let fromcountry = document.querySelector('.fromIMG');
+let toCountry = document.querySelector('.toIMG');
 
 document.querySelector('.money').value = 100;
 
+
 // creating options for every select element 
-for(let sel of selectDropD){
-    for(let obj in currencyToCountry){
-        let dropdown = document.createElement('option');
-        dropdown.innerHTML = `${obj}`;
-        sel.appendChild(dropdown);
-    }
-}
+
+
+//changing images when edit dropdown
+selectDropD[0].addEventListener('change',(e)=>{
+    fromcountry.src=`https://flagsapi.com/${currencyToCountry[selectDropD[0].value]}/flat/64.png`;
+})
+selectDropD[1].addEventListener('change',(e)=>{
+    toCountry.src = `https://flagsapi.com/${currencyToCountry[selectDropD[1].value]}/flat/64.png`;
+})
+
 
 //adding button functionality 
 ConvertBtn.addEventListener('click',(evt)=>{
@@ -24,8 +30,3 @@ ConvertBtn.addEventListener('click',(evt)=>{
     
 })
 
-for(let sel of selectDropD){
-    sel.addEventListener('change',(el)=>{
-        console.log(el.target.value)
-    })
-}
